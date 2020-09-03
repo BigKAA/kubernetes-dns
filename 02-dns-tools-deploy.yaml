@@ -16,17 +16,17 @@ spec:
       hostname: dns
       subdomain: tools
       containers:
-      - name: dnstools
-        image: infoblox/dnstools:latest
-        command:
-          - sleep
-          - "36000"
-        imagePullPolicy: IfNotPresent
-        resources:
-          limits:
-            cpu: "0.2"
-            memory: "300Mi"
-          requests:
-            cpu: "0.1"
-            memory: "100Mi"
+        - name: dnstools
+          image: infoblox/dnstools:latest
+          command:
+            - sleep
+            - "36000"
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: "0.2"
+              memory: "300Mi"
+            requests:
+              cpu: "0.1"
+              memory: "100Mi"
       restartPolicy: Always
