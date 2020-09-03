@@ -7,10 +7,10 @@ spec:
   hostname: dns
   subdomain: tools
   containers:
-  - name: dnstools
-    image: infoblox/dnstools:latest
-    command:
-      - sleep
-      - "36000"
-    imagePullPolicy: IfNotPresent
+    - name: dnstools
+      image: infoblox/dnstools:latest
+      command:
+        - sleep
+        - "36000"
+      imagePullPolicy: IfNotPresent
   restartPolicy: Always
