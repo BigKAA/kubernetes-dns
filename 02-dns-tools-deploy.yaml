@@ -15,6 +15,14 @@ spec:
     spec:
       hostname: dns
       subdomain: tools
+      hostAliases:
+        - ip: 8.8.8.8
+          hostnames:
+            - dns.google.local
+            - dns8.google.local
+        - ip: 8.8.4.4
+          hostnames:
+            - dns4.google.local
       containers:
         - name: dnstools
           image: infoblox/dnstools:latest
