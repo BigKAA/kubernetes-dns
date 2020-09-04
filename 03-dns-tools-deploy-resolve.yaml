@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dnstools
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dnstools
+  template:
+    metadata:
+      labels:
+        app: dnstools
+    spec:
+      hostname: dns
+      subdomain: tools
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - 8.8.8.8
+          - 8.8.4.4
+        searches:
+          - kryukov.biz
+        options:
+          - name: ndots
+            value: "2"
+      containers:
+        - name: dnstools
+          image: infoblox/dnstools:latest
+          command:
+            - sleep
+            - "36000"
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: "0.2"
+              memory: "300Mi"
+            requests:
+              cpu: "0.1"
+              memory: "100Mi"
+      restartPolicy: Always

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dnstools
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dnstools
+  template:
+    metadata:
+      labels:
+        app: dnstools
+    spec:
+      hostname: dns
+      subdomain: tools
+      hostAliases:
+        - ip: 8.8.8.8
+          hostnames:
+            - dns.google.local
+            - dns8.google.local
+        - ip: 8.8.4.4
+          hostnames:
+            - dns4.google.local
+      containers:
+        - name: dnstools
+          image: infoblox/dnstools:latest
+          command:
+            - sleep
+            - "36000"
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: "0.2"
+              memory: "300Mi"
+            requests:
+              cpu: "0.1"
+              memory: "100Mi"
+      restartPolicy: Always
