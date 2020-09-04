@@ -9,3 +9,7 @@ infoblox/dnstools:
 
     kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest dnstools
 
+Запуск программ на конктретной ноде:
+
+    kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest dnstools \
+    --overrides='{"apiVersion": "v1", "spec": {"nodeSelector": { "kubernetes.io/hostname": "node1.kryukov.local" }}}'
